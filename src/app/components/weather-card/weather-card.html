@@ -1,0 +1,47 @@
+<div class="weather-card">
+  <!-- Loading state -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Chargement des données météo...</p>
+  </div>
+
+  <!-- Error state -->
+  <div *ngIf="error" class="error-state">
+    <p>Erreur: {{ error }}</p>
+  </div>
+
+  <!-- Weather data -->
+  <div *ngIf="weatherData && !loading && !error" class="weather-content">
+    <div class="weather-header">
+      <h2>{{ cityName }}</h2>
+      <div class="weather-icon">
+        <img [src]="iconUrl" [alt]="description" />
+      </div>
+    </div>
+
+    <div class="temperature-section">
+      <div class="main-temp">
+        <span class="temp-value">{{ temperature }}</span>
+        <span class="temp-desc">{{ description }}</span>
+      </div>
+      <div class="feels-like">
+        Ressenti: {{ feelsLike }}
+      </div>
+    </div>
+
+    <div class="weather-details">
+      <div class="detail-item">
+        <span class="detail-label">Humidité</span>
+        <span class="detail-value">{{ humidity }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Vent</span>
+        <span class="detail-value">{{ windSpeed }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Pression</span>
+        <span class="detail-value">{{ pressure }}</span>
+      </div>
+    </div>
+  </div>
+</div>
