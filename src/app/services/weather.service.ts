@@ -11,7 +11,7 @@ import { API_CONFIG } from '../config/api.config';
 export class WeatherService {
   private readonly API_KEY = API_CONFIG.OPENWEATHER_API_KEY;
   private readonly BASE_URL = 'https://api.openweathermap.org/data/2.5';
-  
+
   constructor(private http: HttpClient) {}
 
   getCurrentWeather(city: string): Observable<WeatherData> {
