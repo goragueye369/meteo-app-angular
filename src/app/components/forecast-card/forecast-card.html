@@ -1,0 +1,46 @@
+<div class="forecast-card">
+  <!-- Loading state -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Chargement des prévisions...</p>
+  </div>
+
+  <!-- Error state -->
+  <div *ngIf="error" class="error-state">
+    <p>Erreur: {{ error }}</p>
+  </div>
+
+  <!-- Forecast data -->
+  <div *ngIf="forecastData && !loading && !error" class="forecast-content">
+    <div class="forecast-header">
+      <h2>Prévisions pour {{ cityName }}</h2>
+      <p>5 prochains jours</p>
+    </div>
+
+    <div class="forecast-list">
+      <div 
+        *ngFor="let item of forecastList" 
+        class="forecast-item"
+      >
+        <div class="forecast-day">
+          <span class="day-name">{{ getDayName(item) }}</span>
+        </div>
+
+        <div class="forecast-icon">
+          <img [src]="getIconUrl(item)" [alt]="getWeatherDescription(item)" />
+        </div>
+
+        <div class="forecast-temps">
+          <div class="temp-range">
+            <span class="temp-max">{{ getMaxTemperature(item) }}</span>
+            <span class="temp-min">{{ getMinTemperature(item) }}</span>
+          </div>
+        </div>
+
+        <div class="forecast-desc">
+          <span>{{ getWeatherDescription(item) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
