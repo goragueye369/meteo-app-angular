@@ -3,13 +3,13 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { WeatherData, ForecastData, WeatherError } from '../models/weather.models';
-import { environment } from '../../environments/environment';
+import { API_CONFIG } from '../config/api.config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WeatherService {
-  private readonly API_KEY = environment.openWeatherMapApiKey;
+  private readonly API_KEY = API_CONFIG.OPENWEATHER_API_KEY;
   private readonly BASE_URL = 'https://api.openweathermap.org/data/2.5';
   
   constructor(private http: HttpClient) {}
