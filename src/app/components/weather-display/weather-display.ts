@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { WeatherService } from '../../services/weather.service';
 import { WeatherData, ForecastData } from '../../models/weather.models';
-// import { SimpleWeatherComponent } from '../simple-weather/simple-weather';
+import { SimpleWeatherComponent } from '../simple-weather/simple-weather';
+import { WeatherMapComponent } from '../weather-map/weather-map';
 
 @Component({
   selector: 'app-weather-display',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SimpleWeatherComponent, WeatherMapComponent],
   template: `
     <div class="weather-app">
       <!-- Barre de recherche -->
@@ -16,32 +17,11 @@ import { WeatherData, ForecastData } from '../../models/weather.models';
         <button (click)="loadWeather()">Rechercher</button>
       </div>
 
-      <!-- Les 3 cartes -->
-      <div class="cards" *ngIf="currentWeather">
-        <!-- Carte pluie -->
-        <div class="card blue">
-          <h2>{{ city }}</h2>
-          <div class="icon">🌧</div>
-          <h1>{{ currentWeather.main.temp }}°</h1>
-          <p>Pluie</p>
-        </div>
+      <!-- Carte météo interactive -->
+      <app-weather-map [weatherData]="currentWeather"></app-weather-map>
 
-        <!-- Carte orage -->
-        <div class="card purple">
-          <h2>{{ city }}</h2>
-          <div class="icon">⚡</div>
-          <h1>{{ currentWeather.main.temp }}°</h1>
-          <p>Orage</p>
-        </div>
-
-        <!-- Carte soleil -->
-        <div class="card light">
-          <h2>{{ city }}</h2>
-          <div class="icon">☀️</div>
-          <h1>{{ currentWeather.main.temp }}°</h1>
-          <p>Ensoleillé</p>
-        </div>
-      </div>
+      <!-- Prévisions détaillées -->
+      <app-simple-weather [weatherData]="currentWeather" [forecastData]="forecast"></app-simple-weather>
     </div>
   `,
   styles: [
