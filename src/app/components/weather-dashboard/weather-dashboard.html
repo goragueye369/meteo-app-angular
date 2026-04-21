@@ -8,23 +8,23 @@
   <section class="search-section">
     <div class="search-container">
       <div class="search-input-group">
-        <input 
-          type="text" 
-          [(ngModel)]="searchCity" 
+        <input
+          type="text"
+          [(ngModel)]="searchCity"
           (ngModelChange)="onCityChange()"
           placeholder="Entrez une ville (ex: Dakar, Saint-Louis, Thiès)"
           class="search-input"
           [disabled]="loading"
         />
-        <button 
-          (click)="searchWeather()" 
+        <button
+          (click)="searchWeather()"
           [disabled]="loading || !searchCity.trim()"
           class="search-btn"
         >
           {{ loading ? 'Chargement...' : 'Rechercher' }}
         </button>
-        <button 
-          (click)="getCurrentLocation()" 
+        <button
+          (click)="getCurrentLocation()"
           [disabled]="loading"
           class="location-btn"
           title="Utiliser ma position actuelle"
@@ -40,8 +40,8 @@
           <button (click)="clearHistory()" class="clear-btn">Effacer</button>
         </div>
         <div class="history-items">
-          <span 
-            *ngFor="let city of searchHistory" 
+          <span
+            *ngFor="let city of searchHistory"
             (click)="selectCityFromHistory(city)"
             class="history-item"
           >

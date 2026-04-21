@@ -5,7 +5,7 @@ import { WeatherDisplayComponent } from './components/weather-display/weather-di
   selector: 'app-root',
   imports: [WeatherDisplayComponent],
   templateUrl: './app.html',
-  styleUrls: ['./app.css']
+  styleUrls: ['./app.css'],
 })
 export class App {
   protected readonly title = signal('meteo-app');
