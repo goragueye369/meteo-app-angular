@@ -57,7 +57,7 @@ export class WeatherService {
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'Une erreur est survenue';
     
-    if (error.error instanceof ErrorEvent) {
+    if (error.error && typeof error.error === 'object' && error.error.message) {
       // Erreur côté client
       errorMessage = `Erreur client: ${error.error.message}`;
     } else {
