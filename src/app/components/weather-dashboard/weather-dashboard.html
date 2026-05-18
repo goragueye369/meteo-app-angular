@@ -1,0 +1,84 @@
+<div class="weather-dashboard">
+  <header class="dashboard-header">
+    <h1>Application Météo Sénégal</h1>
+    <p>Météo en temps réel pour vos villes favorites</p>
+  </header>
+
+  <!-- Section de recherche avec data binding bidirectionnel -->
+  <section class="search-section">
+    <div class="search-container">
+      <div class="search-input-group">
+        <input 
+          type="text" 
+          [(ngModel)]="searchCity" 
+          (ngModelChange)="onCityChange()"
+          placeholder="Entrez une ville (ex: Dakar, Saint-Louis, Thiès)"
+          class="search-input"
+          [disabled]="loading"
+        />
+        <button 
+          (click)="searchWeather()" 
+          [disabled]="loading || !searchCity.trim()"
+          class="search-btn"
+        >
+          {{ loading ? 'Chargement...' : 'Rechercher' }}
+        </button>
+        <button 
+          (click)="getCurrentLocation()" 
+          [disabled]="loading"
+          class="location-btn"
+          title="Utiliser ma position actuelle"
+        >
+          <span>GPS</span>
+        </button>
+      </div>
+
+      <!-- Historique des recherches -->
+      <div *ngIf="searchHistory.length > 0" class="search-history">
+        <div class="history-header">
+          <span>Recherches récentes:</span>
+          <button (click)="clearHistory()" class="clear-btn">Effacer</button>
+        </div>
+        <div class="history-items">
+          <span 
+            *ngFor="let city of searchHistory" 
+            (click)="selectCityFromHistory(city)"
+            class="history-item"
+          >
+            {{ city }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Message d'erreur -->
+  <div *ngIf="error" class="error-message">
+    <p>{{ error }}</p>
+  </div>
+
+  <!-- Contenu météo -->
+  <main class="weather-content">
+    <div class="weather-grid">
+      <!-- Carte météo actuelle -->
+      <app-weather-card
+        [weatherData]="currentWeather"
+        [loading]="loading"
+        [error]="error"
+      ></app-weather-card>
+
+      <!-- Carte prévisions -->
+      <app-forecast-card
+        [forecastData]="forecast"
+        [loading]="loading"
+        [error]="error"
+      ></app-forecast-card>
+    </div>
+  </main>
+
+  <!-- Informations supplémentaires -->
+  <footer class="dashboard-footer">
+    <p>Données fournies par OpenWeatherMap</p>
+    <p>Application développée avec Angular 17</p>
+  </footer>
+</div>
